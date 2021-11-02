@@ -1,7 +1,7 @@
 const OBSTACLE_TYPES = ['trash', 'boy', 'girl']
 
 class Obstacle extends Item {
-	speed = 1
+	speed = 3
 
 	constructor(ctx, imageSrc, x, y, width, height) {
 		super(ctx, imageSrc, x, y, width, height)

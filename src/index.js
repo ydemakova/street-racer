@@ -28,8 +28,6 @@ const laneImages = [
 let isGameOver = false
 let intervalId
 
-// addObstacle('left')
-
 function main() {
 	// draws
 	ctx.drawImage(background, 0, 0, canvas.width, canvas.height)
@@ -38,12 +36,21 @@ function main() {
 	laneObstacles.right.forEach((obstacle) => obstacle.draw())
 
 	addObstacle()
+	controlCollition()
 
 	if (isGameOver) {
 		cancelAnimationFrame(intervalId)
 	} else {
 		intervalId = requestAnimationFrame(main)
 	}
+}
+
+function controlCollition() {
+	laneObstacles.left.forEach((obstacle) => {
+		if (car.x + car.width > obstacle.x + 10) {
+			isGameOver = true
+		}
+	})
 }
 
 function addObstacle(lane) {
