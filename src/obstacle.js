@@ -8,6 +8,8 @@ class Obstacle extends Item {
 
 		const randomIndex = randomNumber(0, OBSTACLE_TYPES.length - 1)
 		this.type = OBSTACLE_TYPES[randomIndex]
+		this.randomCarWidthsToNext = randomNumber(3, 4)
+		console.log('this.randomCarWidthsToNext: ', this.randomCarWidthsToNext)
 	}
 
 	move() {

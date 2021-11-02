@@ -28,22 +28,16 @@ const laneImages = [
 let isGameOver = false
 let intervalId
 
-addObstacle()
-addObstacle()
+// addObstacle('left')
 
 function main() {
 	// draws
 	ctx.drawImage(background, 0, 0, canvas.width, canvas.height)
-	car.draw()
 	laneObstacles.left.forEach((obstacle) => obstacle.draw())
+	car.draw()
 	laneObstacles.right.forEach((obstacle) => obstacle.draw())
 
-	if (
-		laneObstacles.left[laneObstacles.left.length - 1].x + 2 * car.width <
-		canvas.width
-	) {
-		addObstacle('left')
-	}
+	addObstacle()
 
 	if (isGameOver) {
 		cancelAnimationFrame(intervalId)
@@ -54,6 +48,19 @@ function main() {
 
 function addObstacle(lane) {
 	lane = lane || randomNumber(0, 1) === 0 ? 'left' : 'right'
+
+	if (laneObstacles[lane].length > 0) {
+		const lastObstacle = laneObstacles[lane][laneObstacles[lane].length - 1]
+		const lastObstacleX = lastObstacle.x
+		const randomCardWidthMult =
+			lastObstacle.randomCarWidthsToNext * car.width
+		const randomDistanceFull = lastObstacleX + randomCardWidthMult
+
+		if (randomDistanceFull > canvas.width) {
+			return
+		}
+	}
+
 	const laneY = laneYs[lane]
 	const randomImg = laneImages[randomNumber(0, laneImages.length - 1)]
 	const obstacle = new Obstacle(
