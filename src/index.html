@@ -9,13 +9,21 @@
 	<style>
 		canvas {
 			border: solid 3px #000;
-			margin: 100px auto;
+			margin: 50px auto;
 			display: block;
+		}
+
+		.score {
+			position: absolute;
+			top: 150px;
+			left: 50%;
+			text-decoration: center;
 		}
 	</style>
 
 	<body>
 		<canvas id="game-canvas" width="1200" height="700"></canvas>
+		<h1 class="score">1000</h1>
 		<script src="item.js"></script>
 		<script src="car.js"></script>
 		<script src="obstacle.js"></script>

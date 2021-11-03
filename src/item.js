@@ -1,7 +1,7 @@
 class Item {
 	image = new Image()
 
-	constructor(ctx, imageSrc, x, y, width, height) {
+	constructor(ctx, imageSrc, x, y, width, height, laneYs) {
 		this.ctx = ctx
 		this.image.src = imageSrc
 
@@ -9,6 +9,7 @@ class Item {
 		this.y = y
 		this.width = width
 		this.height = height
+		this.laneYs = laneYs
 	}
 
 	draw() {
