@@ -13,20 +13,74 @@
 			display: block;
 		}
 
+		.hidden {
+			display: none;
+		}
+
 		.score {
 			position: absolute;
-			top: 150px;
-			left: 50%;
+			top: 80px;
+			left: 30%;
 			text-decoration: center;
+			font-size: 40px;
+			color: blueviolet;
+		}
+
+		.running .menu {
+			display: none;
+		}
+
+		.menu {
+			align-items: center;
+			background-color: rgba(255, 255, 255, 0.8);
+			display: flex;
+			height: 800px;
+			justify-content: center;
+			left: 0;
+			flex-direction: column;
+			margin: 0 auto;
+			position: absolute;
+			text-align: center;
+			top: 50px;
+			width: 100%;
+		}
+
+		.menu button {
+			font-size: 3rem;
+			background-color: cornflowerblue;
+			padding: 1rem 4rem;
+			border: none;
+			border-radius: 15px;
+		}
+
+		.menu button:hover {
+			background-color: skyblue;
+			cursor: pointer;
 		}
 	</style>
 
 	<body>
 		<canvas id="game-canvas" width="1200" height="700"></canvas>
-		<h1 class="score">1000</h1>
+
+		<div class="score">Score: <span id="actual-score"></span></div>
+
+		<div class="menu">
+			<h1>Street Racer</h1>
+			<p>
+				The aim of the game is to race on the road and avoid obstacles.
+				<br />
+				You are not allowed to leave the lanes and to hit the obstacles
+				(otherwise - game is over) <br />
+				By pushing SPACE you change the lane. <br />
+				The more obstacles you pass, the higher the score becomes
+			</p>
+			<button type="button" id="start-button">Start</button>
+		</div>
+
 		<script src="item.js"></script>
 		<script src="car.js"></script>
 		<script src="obstacle.js"></script>
 		<script src="index.js"></script>
+		<script src="score.js"></script>
 	</body>
 </html>

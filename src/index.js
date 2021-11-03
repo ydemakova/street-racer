@@ -22,13 +22,13 @@ const laneImages = [
 const carImage = '/Users/yuliademakova/Desktop/street-racer/assets/car.png'
 const car = new Car(ctx, carImage, 100, canvas.height - 165, 200, 100, laneYs)
 
-let isGameOver = false
+let isGameRunning = false
 let intervalId
 let score = 0
 
 function main() {
-	// draws
 	ctx.drawImage(background, 0, 0, canvas.width, canvas.height)
+
 	laneObstacles
 		.filter((obstacle) => obstacle.lane === 'left')
 		.forEach((obstacle) => obstacle.draw())
@@ -40,11 +40,10 @@ function main() {
 	addObstacle()
 	controlCollition()
 	removeObstacles()
+	intervalId = requestAnimationFrame(main)
 
-	if (isGameOver) {
-		cancelAnimationFrame(intervalId)
-	} else {
-		intervalId = requestAnimationFrame(main)
+	if (!isGameRunning) {
+		return cancelAnimationFrame(intervalId)
 	}
 }
 
@@ -54,9 +53,8 @@ function controlCollition() {
 		const isBehindCar = car.x > obstacle.x + 10
 		const isWihinCar = !isBeforeCar && !isBehindCar
 		if (obstacle.lane === car.lane && isWihinCar) {
-			isGameOver = true
+			isGameRunning = false
 		}
-		// console.log('isGameOver: ', isGameOver)
 	})
 }
 
@@ -95,12 +93,12 @@ function removeObstacles() {
 			score += obstacle.speed
 			obstacleCounter++
 
-			if (obstacleCounter % 2 === 0) {
+			if (obstacleCounter % 10 === 0) {
 				console.log(obstacleCounter)
 				Obstacle.prototype.speed += 1 // TODO: repair!
 			}
 
-			console.log(score)
+			showScore(score)
 			return false
 		}
 		return true
@@ -109,4 +107,11 @@ function removeObstacles() {
 
 window.addEventListener('load', () => {
 	main()
+
+	const startButton = document.getElementById('start-button')
+	startButton.addEventListener('click', () => {
+		document.body.classList += 'running'
+		isGameRunning = true
+		main()
+	})
 })
