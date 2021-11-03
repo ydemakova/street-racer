@@ -4,60 +4,8 @@
 		<meta charset="UTF-8" />
 		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
 		<title>Racing</title>
+		<link rel="stylesheet" href="index.css" />
 	</head>
-
-	<style>
-		canvas {
-			border: solid 3px #000;
-			margin: 50px auto;
-			display: block;
-		}
-
-		.hidden {
-			display: none;
-		}
-
-		.score {
-			position: absolute;
-			top: 80px;
-			left: 30%;
-			text-decoration: center;
-			font-size: 40px;
-			color: blueviolet;
-		}
-
-		.running .menu {
-			display: none;
-		}
-
-		.menu {
-			align-items: center;
-			background-color: rgba(255, 255, 255, 0.8);
-			display: flex;
-			height: 800px;
-			justify-content: center;
-			left: 0;
-			flex-direction: column;
-			margin: 0 auto;
-			position: absolute;
-			text-align: center;
-			top: 50px;
-			width: 100%;
-		}
-
-		.menu button {
-			font-size: 3rem;
-			background-color: cornflowerblue;
-			padding: 1rem 4rem;
-			border: none;
-			border-radius: 15px;
-		}
-
-		.menu button:hover {
-			background-color: skyblue;
-			cursor: pointer;
-		}
-	</style>
 
 	<body>
 		<canvas id="game-canvas" width="1200" height="700"></canvas>
@@ -77,10 +25,14 @@
 			<button type="button" id="start-button">Start</button>
 		</div>
 
+		<div class="game-over-menu">
+			<h1>Game Over</h1>
+			<p>Your score is <span id="final-score"></span></p>
+		</div>
+
 		<script src="item.js"></script>
 		<script src="car.js"></script>
 		<script src="obstacle.js"></script>
 		<script src="index.js"></script>
-		<script src="score.js"></script>
 	</body>
 </html>

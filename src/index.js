@@ -3,8 +3,7 @@ const ctx = canvas.getContext('2d')
 
 // background
 const background = new Image()
-background.src =
-	'/Users/yuliademakova/Desktop/street-racer/assets/background.jpg'
+background.src = '../assets/background.jpg'
 
 // lanes
 const laneYs = {
@@ -13,18 +12,25 @@ const laneYs = {
 }
 let laneObstacles = []
 const laneImages = [
-	'/Users/yuliademakova/Desktop/street-racer/assets/trash.png',
-	'/Users/yuliademakova/Desktop/street-racer/assets/boy.png',
-	'/Users/yuliademakova/Desktop/street-racer/assets/girl.png',
+	'../assets/trash.png',
+	'../assets/boy.png',
+	'../assets/girl.png',
 ]
 
+const audios = {
+	crash: new Audio('../assets/crash.wav'),
+	breaking: new Audio('../assets/breaking.wav'),
+}
+
 // car
-const carImage = '/Users/yuliademakova/Desktop/street-racer/assets/car.png'
+const carImage = '../assets/car.png'
 const car = new Car(ctx, carImage, 100, canvas.height - 165, 200, 100, laneYs)
 
 let isGameRunning = false
+let isGameOver = false
 let intervalId
 let score = 0
+showScore(score)
 
 function main() {
 	ctx.drawImage(background, 0, 0, canvas.width, canvas.height)
@@ -52,8 +58,11 @@ function controlCollition() {
 		const isBeforeCar = car.x + car.width < obstacle.x + 10
 		const isBehindCar = car.x > obstacle.x + 10
 		const isWihinCar = !isBeforeCar && !isBehindCar
+
 		if (obstacle.lane === car.lane && isWihinCar) {
-			isGameRunning = false
+			gameOver()
+		} else if (car.x + car.width === obstacle.x) {
+			new Audio('../assets/passing-by.wav').play()
 		}
 	})
 }
@@ -92,12 +101,6 @@ function removeObstacles() {
 		if (obstacle.x + obstacle.width < 0) {
 			score += obstacle.speed
 			obstacleCounter++
-
-			if (obstacleCounter % 10 === 0) {
-				console.log(obstacleCounter)
-				Obstacle.prototype.speed += 1 // TODO: repair!
-			}
-
 			showScore(score)
 			return false
 		}
@@ -105,12 +108,25 @@ function removeObstacles() {
 	})
 }
 
+function showScore(score) {
+	document.getElementById('actual-score').innerText = score
+}
+
+function gameOver() {
+	isGameRunning = false
+	document.body.classList.add('game-over')
+	document.getElementById('final-score').innerText = score
+	audios.crash.play()
+}
+
 window.addEventListener('load', () => {
 	main()
 
 	const startButton = document.getElementById('start-button')
 	startButton.addEventListener('click', () => {
-		document.body.classList += 'running'
+		new Audio('../assets/texasradiofish_-_Rockin_Joe.mp3').play()
+		new Audio('../assets/ignition.wav').play()
+		document.body.classList.add('running')
 		isGameRunning = true
 		main()
 	})

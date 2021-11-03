@@ -3,7 +3,6 @@ class Car extends Item {
 
 	constructor(ctx, imageSrc, x, y, width, height, laneYs) {
 		super(ctx, imageSrc, x, y, width, height, laneYs)
-
 		this.listenToTheEvent()
 	}
 
@@ -21,6 +20,7 @@ class Car extends Item {
 		document.addEventListener('keydown', (event) => {
 			if (event.code === 'spacebar' || event.code === 'Space') {
 				this.switchLane()
+				new Audio('../assets/breaking.wav').play()
 			}
 		})
 	}
