@@ -1,5 +1,9 @@
 # Street Racer
 
+## Game start
+
+Start the game by calling the [index.html](index.html).
+
 ## Concept
 
 -   `obstacleDistanceMin` = 2 x `widthOfCar`
