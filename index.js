@@ -4,6 +4,7 @@ const ctx = canvas.getContext('2d')
 // background
 const background = new Image()
 background.src = './assets/background.jpg'
+const backgroundMusic = new Audio('./assets/texasradiofish_-_Rockin_Joe.mp3')
 
 // lanes
 const laneYs = {
@@ -117,6 +118,7 @@ function gameOver() {
 	document.body.classList.add('game-over')
 	document.getElementById('final-score').innerText = score
 	audios.crash.play()
+	backgroundMusic.pause()
 }
 
 window.addEventListener('load', () => {
@@ -124,7 +126,7 @@ window.addEventListener('load', () => {
 
 	const startButton = document.getElementById('start-button')
 	startButton.addEventListener('click', () => {
-		new Audio('./assets/texasradiofish_-_Rockin_Joe.mp3').play()
+		backgroundMusic.play()
 		new Audio('./assets/ignition.wav').play()
 		document.body.classList.add('running')
 		isGameRunning = true
