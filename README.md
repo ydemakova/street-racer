@@ -2,7 +2,7 @@
 
 ## Game start
 
-Start the game by calling the [index.html](index.html).
+Start the game by calling this [link](https://ydemakova.github.io/street-racer/).
 
 ## Concept
 
