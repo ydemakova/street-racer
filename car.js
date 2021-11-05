@@ -20,7 +20,7 @@ class Car extends Item {
 		document.addEventListener('keydown', (event) => {
 			if (event.code === 'spacebar' || event.code === 'Space') {
 				this.switchLane()
-				new Audio('./assets/breaking.wav').play()
+				new GameAudio('breaking.wav').play()
 			}
 		})
 	}

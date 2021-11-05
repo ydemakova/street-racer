@@ -4,7 +4,7 @@ const ctx = canvas.getContext('2d')
 // background
 const background = new Image()
 background.src = './assets/background.jpg'
-const backgroundMusic = new Audio('./assets/texasradiofish_-_Rockin_Joe.mp3')
+const backgroundMusic = new GameAudio('texasradiofish_-_Rockin_Joe.mp3')
 
 // lanes
 const laneYs = {
@@ -19,8 +19,8 @@ const laneImages = [
 ]
 
 const audios = {
-	crash: new Audio('./assets/crash.wav'),
-	breaking: new Audio('./assets/breaking.wav'),
+	crash: new GameAudio('crash.wav'),
+	breaking: new GameAudio('breaking.wav'),
 }
 
 // car
@@ -63,7 +63,7 @@ function controlCollition() {
 		if (obstacle.lane === car.lane && isWihinCar) {
 			gameOver()
 		} else if (car.x + car.width === obstacle.x) {
-			new Audio('./assets/passing-by.wav').play()
+			new GameAudio('passing-by.wav').play()
 		}
 	})
 }
@@ -118,7 +118,7 @@ function gameOver() {
 	document.body.classList.add('game-over')
 	document.getElementById('final-score').innerText = score
 	audios.crash.play()
-	backgroundMusic.pause()
+	backgroundMusic.stop()
 }
 
 window.addEventListener('load', () => {
@@ -127,7 +127,7 @@ window.addEventListener('load', () => {
 	const startButton = document.getElementById('start-button')
 	startButton.addEventListener('click', () => {
 		backgroundMusic.play()
-		new Audio('./assets/ignition.wav').play()
+		new GameAudio('ignition.wav').play()
 		document.body.classList.add('running')
 		isGameRunning = true
 		main()
